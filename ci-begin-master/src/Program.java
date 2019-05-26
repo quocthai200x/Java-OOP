@@ -4,6 +4,8 @@ import tklibs.SpriteUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.desktop.SystemSleepEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -16,30 +18,78 @@ public class Program {
 
         JFrame window = new JFrame();
         window.setTitle("Game Touhou");
-        window.setSize(800, 600);
+//        window.setSize(800, 600);
         window.setResizable(false);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //        JPanel panel = new JPanel();
+        window.addKeyListener(new KeyAdapter() {
+          @Override
+          public void keyPressed(KeyEvent e) {
+              if (e.getKeyCode() == KeyEvent.VK_W) {
+                  KeyEventPress.isUpPress = true;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_A) {
+                  KeyEventPress.isLeftPress = true;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_S) {
+                  KeyEventPress.isDownPress = true;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_D) {
+                  KeyEventPress.isRightPress = true;
+
+              }
+
+
+          }
+
+          @Override
+          public void keyReleased(KeyEvent e) {
+              if (e.getKeyCode() == KeyEvent.VK_W) {
+                  KeyEventPress.isUpPress = false;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_A) {
+                  KeyEventPress.isLeftPress = false;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_S) {
+                  KeyEventPress.isDownPress = false;
+
+              }
+              if (e.getKeyCode() == KeyEvent.VK_D) {
+                  KeyEventPress.isRightPress = false;
+
+              }
+          }
+      });
+
+
         GamePanel panel = new GamePanel();
         panel.setBackground(Color.CYAN);
+
         window.add(panel);
+        panel.setPreferredSize(new Dimension(800,600));
+        window.pack();
 
 
         window.setVisible(true);
         panel.gameloop();
+        }
+    }
 
-        // Phim tat : comment post Ctrl + ?
-        // alt +enter :fix codde
-        // shift f6 :sua het ten
-        // ctrl alt l :format code
+
+// Phim tat : comment post Ctrl + ?
+// alt +enter :fix codde
+// shift f6 :sua het ten
+// ctrl alt l :format code
 
 
 //        BufferedImage playerImage = SpriteUtils.loadImage("assets/images/players/straight/0.png");
 //        System.out.println(playerImage.getWidth());
 //        System.out.println(playerImage.getHeight());
-
-    }
-}
 
 
 //        student student1 = new student();

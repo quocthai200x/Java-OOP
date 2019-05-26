@@ -1,5 +1,7 @@
 package tklibs;
 
+import java.util.Random;
+
 /**
  * Created by huynq on 5/20/17.
  */
@@ -30,4 +32,17 @@ public class Mathx {
         if (value > max) return max;
         return value;
     }
-}
+    static Random random = new Random();
+
+    public static  int random(int bound){
+        return  random.nextInt(bound);
+    }
+    public  static  int random(int min ,int max ){
+        return min + random.nextInt(max - min +1);
+    }
+
+
+    }
+
+
+
