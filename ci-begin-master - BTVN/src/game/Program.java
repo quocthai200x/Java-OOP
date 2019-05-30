@@ -1,12 +1,12 @@
-import tklibs.SpriteUtils;
+package game;
 
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.desktop.SystemSleepEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * Created by huynq on 7/4/17.
@@ -14,6 +14,33 @@ import java.awt.image.BufferedImage;
 
 
 public class Program {
+//    public static void main(String[] args) {
+//        ArrayList<Vector2D> vectors = new ArrayList<>();
+//        vectors.add(new Vector2D(1,2));
+//        vectors.add(new Vector2D(3,4));
+//        vectors.add(new Vector2D(6,5));
+//        vectors.add(new Vector2D(1,8));
+//        double b = 0;
+//        for (int i =0 ;i <vectors.size();i++){
+//            double a = vectors.get(i).x + vectors.get(i).y;
+//            {if (b<a){
+//                b = a;
+//            } }
+//        }
+//        System.out.println(b);
+//
+////        ArrayList<String>strings = new ArrayList<>();
+////        strings.add("HELLO");
+////        strings.add("WORLD");
+////        System.out.println(strings);
+////        for(int i = 0; i<strings.size();i++){
+////            String element = strings.get(i);
+////            System.out.println(element);
+////        }
+//        // 4 hàm hay dùng : .add() ,.remove() ,.get() , .size()
+
+
+
     public static void main(String[] args) {
 
         JFrame window = new JFrame();
@@ -25,6 +52,9 @@ public class Program {
         window.addKeyListener(new KeyAdapter() {
           @Override
           public void keyPressed(KeyEvent e) {
+              if(e.getKeyCode()== KeyEvent.VK_SPACE){
+                  KeyEventPress.isFirePress = true;
+              }
               if (e.getKeyCode() == KeyEvent.VK_W) {
                   KeyEventPress.isUpPress = true;
 
@@ -47,6 +77,9 @@ public class Program {
 
           @Override
           public void keyReleased(KeyEvent e) {
+              if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                  KeyEventPress.isFirePress = false;
+              }
               if (e.getKeyCode() == KeyEvent.VK_W) {
                   KeyEventPress.isUpPress = false;
 
@@ -81,6 +114,7 @@ public class Program {
     }
 
 
+
 // Phim tat : comment post Ctrl + ?
 // alt +enter :fix codde
 // shift f6 :sua het ten
@@ -102,7 +136,7 @@ public class Program {
 //}
 
 //
-//public class Program {
+//public class game.Program {
 //    public static double sum(double a, double b) {
 //        return a + b;
 //    }
