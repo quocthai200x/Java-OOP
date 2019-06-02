@@ -1,11 +1,10 @@
 package game;
 
-import tklibs.Mathx;
-import tklibs.SpriteUtils;
+import game.enemy.Enemy;
+import game.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel {
     Player player;
@@ -13,19 +12,18 @@ public class GamePanel extends JPanel {
     Background background;
     double fps;
     public GamePanel() {
-        player = new Player();
+
         background = new Background();
         enemy = new Enemy();
+        player = new Player();
         fps = 0;
     }
 
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.white);
-        g.fillRect(0, 0, 800, 600);
-        background.render(g);
-        player.render(g);
-        enemy.render(g);
+        g.fillRect(0, 0, Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
+        GameObject.renderAll(g);
         g.setColor(Color.black);
         g.drawString("fps :" + fps, 700, 50);
 
@@ -33,9 +31,7 @@ public class GamePanel extends JPanel {
     }
 
     public void runAll() {
-        background.run();
-        enemy.run();
-        player.run();
+        GameObject.runAll();
     }
 
 
