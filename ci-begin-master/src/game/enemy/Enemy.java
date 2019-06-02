@@ -30,10 +30,10 @@ public class Enemy  extends GameObject {
         if (count > 60) {
             for (double i = 1; i <= 12; i++) {
                 Vector2D test = new Vector2D(1,1);
-                Vector2D angle = test.setAngle(30*i);
-                Vector2D speed = angle.setLength(4);
+                test.setAngle(30*i);
+                test.setLength(4);
                 EnemyBullet b = new EnemyBullet();
-                b.position.set(this.position.x, this.position.y, speed.x, speed.y);// hàm set  mới bên vector2d
+                b.position.set(this.position.x, this.position.y,test.x,test.y);// hàm set  mới bên vector2d
 
             }
             count = 0;
