@@ -1,6 +1,8 @@
 package game;
 
 
+import game.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -14,6 +16,75 @@ import java.util.ArrayList;
 
 
 public class Program {
+    public static void main(String[] args) {
+        JFrame window = new JFrame();
+        window.setTitle("Game Touhou");
+
+        window.setResizable(false);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        JPanel panel = new JPanel();
+        window.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    KeyEventPress.isFirePress = true;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_W) {
+                    KeyEventPress.isUpPress = true;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_A) {
+                    KeyEventPress.isLeftPress = true;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_S) {
+                    KeyEventPress.isDownPress = true;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_D) {
+                    KeyEventPress.isRightPress = true;
+
+                }
+
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    KeyEventPress.isFirePress = false;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_W) {
+                    KeyEventPress.isUpPress = false;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_A) {
+                    KeyEventPress.isLeftPress = false;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_S) {
+                    KeyEventPress.isDownPress = false;
+
+                }
+                if (e.getKeyCode() == KeyEvent.VK_D) {
+                    KeyEventPress.isRightPress = false;
+
+                }
+            }
+        });
+
+
+        GamePanel panel = new GamePanel();
+        panel.setBackground(Color.CYAN);
+
+        window.add(panel);
+        panel.setPreferredSize(new Dimension(Settings.GAME_WIDTH, Settings.GAME_HEIGHT));
+        window.pack();
+
+
+        window.setVisible(true);
+        panel.gameloop();
+    }
 //    public static void main(String[] args) {
 //        ArrayList<Vector2D> vectors = new ArrayList<>();
 //        vectors.add(new Vector2D(1,2));
@@ -38,81 +109,45 @@ public class Program {
 ////            System.out.println(element);
 ////        }
 //        // 4 hàm hay dùng : .add() ,.remove() ,.get() , .size()
+//
+//    public static <E> E getSomething(Class<E> cls) {
+//        try {
+//            return cls.getConstructor().newInstance();
+//        } catch (Exception ex) {
+//            return null;
+//
+//        }
+//    }
+//    public  static  int parseInt(String s) throws Exception{
+//        if(s == null){
+//            throw new Exception("String 'null'!");
+//        }
+//        return  Integer.parseInt(s);
+//    }
+//    public static void main(String[] args) {
+//        try{
+//            int m = parseInt(null);
+//        }catch (Exception ex){
+//            System.out.println("1");
+//            System.out.println(ex.getMessage());
+//            ex.printStackTrace();
+//            System.out.println("3");
+//        }
+//    }
 
 
+////        String s = getSomething(String.class);
+////        GameObject object = getSomething(GameObject.class);
+//
+////        System.out.println(s);
+////        System.out.println(object);
+//        Class<GameObject> gameObjectClass = GameObject.class;
+//        Class<Player> playerClass = Player.class;
+//        System.out.println(gameObjectClass.isAssignableFrom(playerClass));
+//        System.out.println(gameObjectClass.isAssignableFrom(String.class));
+//    }
 
-    public static void main(String[] args) {
-
-        JFrame window = new JFrame();
-        window.setTitle("Game Touhou");
-
-        window.setResizable(false);
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        JPanel panel = new JPanel();
-        window.addKeyListener(new KeyAdapter() {
-          @Override
-          public void keyPressed(KeyEvent e) {
-              if(e.getKeyCode()== KeyEvent.VK_SPACE){
-                  KeyEventPress.isFirePress = true;
-              }
-              if (e.getKeyCode() == KeyEvent.VK_W) {
-                  KeyEventPress.isUpPress = true;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_A) {
-                  KeyEventPress.isLeftPress = true;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_S) {
-                  KeyEventPress.isDownPress = true;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_D) {
-                  KeyEventPress.isRightPress = true;
-
-              }
-
-
-          }
-
-          @Override
-          public void keyReleased(KeyEvent e) {
-              if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                  KeyEventPress.isFirePress = false;
-              }
-              if (e.getKeyCode() == KeyEvent.VK_W) {
-                  KeyEventPress.isUpPress = false;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_A) {
-                  KeyEventPress.isLeftPress = false;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_S) {
-                  KeyEventPress.isDownPress = false;
-
-              }
-              if (e.getKeyCode() == KeyEvent.VK_D) {
-                  KeyEventPress.isRightPress = false;
-
-              }
-          }
-      });
-
-
-        GamePanel panel = new GamePanel();
-        panel.setBackground(Color.CYAN);
-
-        window.add(panel);
-        panel.setPreferredSize(new Dimension(Settings.GAME_WIDTH,Settings.GAME_HEIGHT));
-        window.pack();
-
-
-        window.setVisible(true);
-        panel.gameloop();
-        }
-    }
-
+}
 
 
 // Phim tat : comment post Ctrl + ?

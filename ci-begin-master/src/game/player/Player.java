@@ -3,10 +3,12 @@ package game.player;
 import game.GameObject;
 import game.KeyEventPress;
 import game.Settings;
+import game.physics.BoxCollider;
 import tklibs.Mathx;
 import tklibs.SpriteUtils;
 
 public class Player extends GameObject {
+    public int hp;
 
 
 //    public  BufferedImage getImage(){
@@ -20,10 +22,21 @@ public class Player extends GameObject {
     public Player() {
         image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
         position.set(Settings.PLAYER_START_WIDTH, Settings.PLAYER_START_HEIGHT);
+        hitBox = new BoxCollider(this,32,48);
+        hp =12;
+    }
+    public void takeDamage(int damage){
+        hp -= damage;
+        if(hp<=0){
+            hp=0;
+            this.deactive();
+        }
+
     }
 
     @Override
     public void run() {
+        super.run();
         this.move();
         this.limitPosition();
 
@@ -37,9 +50,20 @@ public class Player extends GameObject {
     private void fire() {
         count++;
         if (KeyEventPress.isFirePress && count > 20) {
-            PlayerBullet bullet = new PlayerBullet();
-            bullet.position.set(this.position.x, this.position.y);
+            double startAngle = -60;
+            double endAngle = -120;
+            double startX = 20;
+            double endX = -20;
+            int numberBullet = 3;
+            double stepAngle = Math.abs(endAngle - startAngle)/(numberBullet-1);
+            double stepX = Math.abs(endX- startX)/(numberBullet-1);
+            for (int i = 0; i <numberBullet ; i++) {
+                PlayerBullet bullet = new PlayerBullet();
+                bullet.position.set(this.position.x +(startX - stepX*i),this.position.y);
+                bullet.velocity.setAngle( Math.toRadians(startAngle -  stepAngle * i));
+                bullet.velocity.setLength(3);
 
+            }
             count = 0;
         }
     }
@@ -52,18 +76,30 @@ public class Player extends GameObject {
     }
 
     private void move() {
+        double vx = 0 ;
+        double vy = 0;
         if (KeyEventPress.isUpPress) {
-            position.y -= Settings.PlAYER_SPEED;
+            vy -= 2;
+
         }
         if (KeyEventPress.isDownPress) {
-            position.y += Settings.PlAYER_SPEED;
+           vy += 2;
+
         }
         if (KeyEventPress.isLeftPress) {
-            position.x -= Settings.PlAYER_SPEED;
+            vx -= 2;
+            image = SpriteUtils.loadImage("assets/images/players/left/0.png");
         }
         if (KeyEventPress.isRightPress) {
-            position.x += Settings.PlAYER_SPEED;
+            vx += 2;
+            image = SpriteUtils.loadImage("assets/images/players/right/0.png");
+        }
+        velocity.set(vx,vy);
+        velocity.setLength(4);
+        if(vx == 0 && vy ==0){
+            image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
         }
 
     }
+
 }

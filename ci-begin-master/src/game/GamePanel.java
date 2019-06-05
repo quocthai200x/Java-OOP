@@ -37,7 +37,7 @@ public class GamePanel extends JPanel {
 
     public void gameloop() {
         long lastTime = 0;
-        long delay = 1000 / 60;
+        long delay = 1000 / 70;
         while (true) {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastTime > delay) {
